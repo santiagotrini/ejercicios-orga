@@ -32,7 +32,13 @@ dividendo = cociente x divisor + resto
 
 [Apunte en el blog](https://la35.net/orga/mips-funciones.html).
 
-`AGREGAR EJERCICIOS`
+1. Reescribir el ejercicio 1 del apunte anterior como una función. La función debe recibir un año como argumento y devolver 1 si es bisiesto o 0 si no lo es.
+2. Reescribir el ejercicio 2 del apunte anterior como una función. La función debe recibir un número entero como argumento y devolver 1 si es par o 0 si es impar.
+3. Reescribir el ejercicio 3 del apunte anterior como una función. La función recibe un entero com argumento y devuelve su valor absoluto.
+4. Escribir una función `is_triangle` que reciba tres argumentos enteros y devuelva 1 si los 3 números pueden ser las longitudes de los lados de un tríangulo o 0 de lo contrario. Ver el ejercicio 10 del apunte anterior.
+5. Reescribir el ejercicio 6 del apunte anterior como una función. La función debe devolver el factorial de un número entero. Calcularlo de manera iterativa, usando un _loop_.
+6. Reescribir la función factorial pero esta vez de manera recursiva.
+7. Escribir una función que devuelva la suma de los primeros *n* números naturales. La cantidad *n* de números es un argumento de la función.
 
 ## MIPS: código máquina
 
