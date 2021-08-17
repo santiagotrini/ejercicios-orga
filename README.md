@@ -18,7 +18,7 @@ dividendo = cociente x divisor + resto
 2. Escribir un programa en MIPS que decida si un número es par o no.
 3. Escribir un programa en MIPS que devuelva el valor absoluto de un número ingresado por el usuario.
 4. Escribir un programa en MIPS que acepte números ingresados por el usuario hasta que el usuario ingrese el número cero. La salida del programa es la suma de todos los números ingresados.
-5. Mismo programa que el ejercicio tres, pero imprimiendo la suma y el promedio de los números ingresados.
+5. Mismo programa que el ejercicio cuatro, pero imprimiendo la suma y el promedio de los números ingresados.
 6. Escribir un programa en MIPS que calcule el factorial de un número.
 7. Escribir un programa en MIPS que sume los números del 1 al 100.
 8. Escribir un programa que imprima las primeras n potencias de dos, siendo n un número ingresado por el usuario. Al finalizar el programa debe imprimir la suma de las potencias calculadas.
