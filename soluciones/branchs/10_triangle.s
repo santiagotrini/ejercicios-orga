@@ -47,4 +47,4 @@ not_triangle:
   syscall
 exit:
   li $v0, 10
-  syscall  
+  syscall
