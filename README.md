@@ -79,3 +79,14 @@ dividendo = cociente x divisor + resto
 ¿Encuentran alguna conexión que pueda interpretarse como de datos o direcciones según cambie la instrucción a ejecutar?
 4. Considere la siguiente instrucción `and $t0, $t1, $t2`. ¿Qué valores toman las señales de control? ¿Qué unidades funcionales realizan una tarea útil? ¿Qué unidades producen una salida pero esa salida no se usa en la instrucción?
 5. Si quisiéramos agregar la instrucción `sll` (*shif left logical*) al *datapath*. ¿Qué modificaciones tendríamos que hacer? ¿Qué unidades habría que agregar? En general para las operaciones de *shift* se usa un circuito llamado *barrel shifter*. Un ejemplo de la instrucción sería `sll $t0, $t1, 5` y significa desplazar a la izquierda 5 bits de `$t1` y guardar el resultado en `$t0`.
+6. Asumiendo que los bloques del *datapath* tienen las siguientes latencias:
+ - Instruction memory: 200ps
+ - Add: 70ps
+ - Mux: 20ps
+ - ALU: 90ps
+ - Register file: 90ps
+ - Data memory: 250ps
+ - Sign extend: 15ps
+ - Shift left 2: 10ps  
+
+¿Cuál es la duración mínima del ciclo de reloj de esta CPU? ¿Qué instrucción se ejecuta más rápido, un `add` o un `lw`? ¿Cuál es la frecuencia máxima de esta CPU y cuántas MIPS (millones de instrucciones por segundo) puede ejecutar?
