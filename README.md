@@ -87,6 +87,7 @@ dividendo = cociente x divisor + resto
 |200ps|70ps|20ps|90ps|90ps|250ps|15ps|10ps|
 
   ¿Cuál es la duración mínima del ciclo de reloj de esta CPU? ¿Qué instrucción se ejecuta más rápido, un `add` o un `lw`? ¿Cuál es la frecuencia máxima de esta CPU y cuántas MIPS (millones de instrucciones por segundo) puede ejecutar?
+  
 9. Considere la instrucción `1010 1100 0110 0010 0000 0000 0001 0100`. Asumiendo que la memoria de datos está completamente en ceros y que los registros tienen los siguientes valores.
 |`$0`|`$1`|`$2`|`$3`|`$4`|`$5`|`$6`|`$8`|`$12`|`$31`|
 |---|---|---|---|---|---|---|---|---|---|
