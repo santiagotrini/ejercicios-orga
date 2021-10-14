@@ -82,13 +82,22 @@ dividendo = cociente x divisor + resto
 6. Marcar el camino crítico para las instrucciones `lw`, `sw`, `add` y `beq` en el diagrama del *datapath* sacado del libro de Patterson (el que está en el blog). El camino crítico es el camino más largo que recorre una instrucción de inicio a fin. Usar los tiempos de propagación del ejercicio 8.
 7. ¿Qué agregarían al *datapath* para implementar instrucciones de comparación como `slt` (*set on less than*)? Ejemplo: `slt $t0, $t1, $t2` significa si `$t1` es menor a `$t2` guardar un uno en `$t0`, de lo contrario guardar un cero.
 8. Asumiendo que los bloques del *datapath* tienen las siguientes latencias:
- - Instruction memory: 200ps
- - Add: 70ps
- - Mux: 20ps
- - ALU: 90ps
- - Register file: 90ps
- - Data memory: 250ps
- - Sign extend: 15ps
- - Shift left 2: 10ps  
+|Instr Mem|Add|Mux|ALU|Reg File|Data Mem|Sign extend|Shift left 2|
+|---|---|---|---|---|---|---|---|
+|200ps|70ps|20ps|90ps|90ps|250ps|15ps|10ps|
 
-¿Cuál es la duración mínima del ciclo de reloj de esta CPU? ¿Qué instrucción se ejecuta más rápido, un `add` o un `lw`? ¿Cuál es la frecuencia máxima de esta CPU y cuántas MIPS (millones de instrucciones por segundo) puede ejecutar?
+  ¿Cuál es la duración mínima del ciclo de reloj de esta CPU? ¿Qué instrucción se ejecuta más rápido, un `add` o un `lw`? ¿Cuál es la frecuencia máxima de esta CPU y cuántas MIPS (millones de instrucciones por segundo) puede ejecutar?
+9. Considere la instrucción `1010 1100 0110 0010 0000 0000 0001 0100`. Asumiendo que la memoria de datos está completamente en ceros y que los registros tienen los siguientes valores.
+|`$0`|`$1`|`$2`|`$3`|`$4`|`$5`|`$6`|`$8`|`$12`|`$31`|
+|---|---|---|---|---|---|---|---|---|---|
+|0|-1|2|-3|-4|10|6|8|2|-16|
+
+ - ¿Cuáles son la salidas del *sign extend* y del *shift left 2*?
+ - ¿Qué valores toman las entradas de ALU control?
+ - ¿Cuál es el nuevo valor del PC después de ejecutar la instrucción? Resaltar el camino por el cual se determina este valor.
+ - Para cada multiplexor indicar el valor de su salida durante esta instrucción.
+ - ¿Qué valores toman las entradas de la ALU y de las dos unidades sumadoras?
+ - ¿Qué valores toman las entradas del archivo de registros?
+
+
+10. ¿Qué modificaciones habría que hacer en el *datapath* para agregar la instrucción `jal` (*jump and link*)?. Usar la versión simulada en Logisim que incorpora la lógica para `j` (*jump*).
