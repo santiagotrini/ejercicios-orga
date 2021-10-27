@@ -120,7 +120,7 @@ dividendo = cociente x divisor + resto
 9. Si eliminamos la señal `MemToReg`, ¿qué instrucciones no podrían ejecutarse correctamente?
 10. La línea azul rotulada como `Zero` que sale de la ALU más que un dato es una señal de control que usa la instrucción `beq` para decidir si dos registros son iguales. Investigar y describir brevemente la solución que usa la arquitectura x86 para que se remonta al microprocesador Intel 8080. Es decir, ¿cuál es la lógica en x86 que se usa para instrucciones como _branchs_ que afectan a las instrucciones que siguen?
 
-## MIPS: pipeline
+## MIPS: Pipeline
 
 [Apunte en el blog](https://la35.net/orga/mips-pipeline.html).
 
@@ -139,12 +139,13 @@ exit:
   addi    $v0, $zero, 10
 ```
 3. Considerar el siguiente código.
-```
-or $1, $2, $3
-or $2, $1, $4
-or $1, $1, $2
-```
-Indicar los riesgos de datos. Si no hay _forwarding_ en este _pipeline_, ¿cómo podemos asegurar que las instrucciones den los resultados correctos? Dibujar un diagrama del _pipeline_ para estas tres instrucciones teniendo en cuenta la solución propuesta para eliminar los riesgos.
+  ```
+  or $1, $2, $3
+  or $2, $1, $4
+  or $1, $1, $2
+  ```
+  Indicar los riesgos de datos. Si no hay _forwarding_ en este _pipeline_, ¿cómo podemos asegurar que las instrucciones den los resultados correctos? Dibujar un diagrama del _pipeline_ para estas tres instrucciones teniendo en cuenta la solución propuesta para eliminar los riesgos.
+  
 4. Indicar los contenidos de los registros del _pipeline_ y cuántos bits ocupa cada uno. Considerar las instrucciones `lw`, `sw`, `addi`, `beq` y las de tipo R. Ojo que en el artículo del blog puede haber alguna simplificación que no es del todo correcta.
 5. ¿Por qué en un riesgo de datos entre dos instrucciones de tipo R no se necesita una "burbuja" pero entre un `lw` y una instrucción de tipo R sí?
 6. Teniendo en cuenta el siguiente código:
@@ -158,6 +159,7 @@ add  $t5, $t1, $t4
 sw   $t5, 16($t0)
 ```
 Encontrar los riesgos en el código y reordenar para evitar burbujas en el _pipeline_. Considerar qué riesgos pueden salvarse mediante _forwarding_.
+
 7. Si insertamos burbujas al _pipeline_ cada vez que en la fase IF traemos un _branch_ para esperar a saber cuál es la próxima instrucción. ¿Cuántos ciclos de reloj desperdiciamos?
 8. Siguiendo con la pregunta anterior. ¿Qué podemos hacer para minimizar el costo de parar el _pipeline_ en cada _branch_?
 9. Para los siguientes fragmentos de código indicar si: se ejecuta normalmente, se ejecuta correctamente usando solo _forwarding_ o tiene que insertar burbujas incluso pudiendo hacer uso de _forwarding_.
