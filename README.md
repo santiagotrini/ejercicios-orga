@@ -101,3 +101,77 @@ dividendo = cociente x divisor + resto
 
 
 10. ¿Qué modificaciones habría que hacer en el *datapath* para agregar la instrucción `jal` (*jump and link*)?. Usar la versión simulada en Logisim que incorpora la lógica para `j` (*jump*).
+
+## MIPS: Control
+
+[Apunte en el blog](https://la35.net/orga/mips-control.html).
+
+1. Mirando las señales de control para `beq`, `j`, `lw`, `sw` y las instrucciones de tipo R. ¿Existe la posibilidad de combinar dos o más señales? ¿Puede reemplazarse alguna señal por la inversa de otra?
+2. Agregar a la unidad de control vista la instrucción `addi`. ¿Qué valores usarían para las dos señales de ALU Op?
+3. Qué diferencia encuentran en la palabra de control (las señales de control consideradas como un único número) entre estas dos instrucciones: `add $1, $2, $3` y `add $7, $8, $9`.
+4. ¿Por qué es necesario tener una señal `RegWrite` para indicar que hay que escribir en el archivo de registros pero no hace falta una señal similar para el _Program Counter_?
+5. Las 4 líneas que salen de ALU Control y entran como señales de control a la ALU, dentro de la ALU, ¿qué es lo que controlan? Observar lo que pasa en el circuito simulado en Logisim.
+6. Si solo quisiéramos implementar instrucciones de tipo R en la CPU de MIPS. ¿Qué señales de control eliminarían y por qué?
+7. Imaginar que solo tenemos que implementar `sw`, `lw` y `addi` en la CPU de MIPS. ¿Cómo harían para implementar el control de este _datapath_ sin agregar una sola compuerta para la unidad de control?
+8. Completando el ejercicio 10 de la guía anterior (_datapath_). ¿Qué cambios harían en la unidad de control para que `jal` funcione correctamente?
+9. Si eliminamos la señal `MemToReg`, ¿qué instrucciones no podrían ejecutarse correctamente?
+10. La línea azul rotulada como `Zero` que sale de la ALU más que un dato es una señal de control que usa la instrucción `beq` para decidir si dos registros son iguales. Investigar y describir brevemente la solución que usa la arquitectura x86 para que se remonta al microprocesador Intel 8080. Es decir, ¿cuál es la lógica en x86 que se usa para instrucciones como _branchs_ que afectan a las instrucciones que siguen?
+
+## MIPS: pipeline
+
+[Apunte en el blog](https://la35.net/orga/mips-pipeline.html).
+
+1. Realizar una tabla de doble entrada indicando en las columnas las cinco fases del _pipeline_ de MIPS y en las filas las siguientes instrucciones: `lw`, `sw`, `beq`, `j`, `addi` e instrucciones de tipo R. Marcar con una cruz las etapas en las que cada instrucción hace algo útil.
+2. Indicar el o los tipos de riesgos que aparecen en el siguiente código. Explicar en cada caso por qué se genera un riesgo.
+```
+  addi    $t1, $zero, 10
+loop:
+  beq     $zero, $t1, exit
+  addi    $t1, $t1, -1
+  addi    $v0, $zero, 1
+  addi    $a0, $zero, 42
+  syscall
+  j       loop
+exit:
+  addi    $v0, $zero, 10
+```
+3. Considerar el siguiente código.
+```
+or $1, $2, $3
+or $2, $1, $4
+or $1, $1, $2
+```
+Indicar los riesgos de datos. Si no hay _forwarding_ en este _pipeline_, ¿cómo podemos asegurar que las instrucciones den los resultados correctos? Dibujar un diagrama del _pipeline_ para estas tres instrucciones teniendo en cuenta la solución propuesta para eliminar los riesgos.
+4. Indicar los contenidos de los registros del _pipeline_ y cuántos bits ocupa cada uno. Considerar las instrucciones `lw`, `sw`, `addi`, `beq` y las de tipo R. Ojo que en el artículo del blog puede haber alguna simplificación que no es del todo correcta.
+5. ¿Por qué en un riesgo de datos entre dos instrucciones de tipo R no se necesita una "burbuja" pero entre un `lw` y una instrucción de tipo R sí?
+6. Teniendo en cuenta el siguiente código:
+```
+lw   $t1, 0($t0)
+lw   $t2, 4($t0)
+add  $t3, $t1, $t2
+sw   $t3, 12($t0)
+lw   $t4, 8($t0)
+add  $t5, $t1, $t4
+sw   $t5, 16($t0)
+```
+Encontrar los riesgos en el código y reordenar para evitar burbujas en el _pipeline_. Considerar qué riesgos pueden salvarse mediante _forwarding_.
+7. Si insertamos burbujas al _pipeline_ cada vez que en la fase IF traemos un _branch_ para esperar a saber cuál es la próxima instrucción. ¿Cuántos ciclos de reloj desperdiciamos?
+8. Siguiendo con la pregunta anterior. ¿Qué podemos hacer para minimizar el costo de parar el _pipeline_ en cada _branch_?
+9. Para los siguientes fragmentos de código indicar si: se ejecuta normalmente, se ejecuta correctamente usando solo _forwarding_ o tiene que insertar burbujas incluso pudiendo hacer uso de _forwarding_.
+```
+lw  $t0, 0($t0)
+add $t1, $t0, $t0
+```
+```
+add  $t1, $t0, $t0
+addi $t2, $t0, 5
+addi $t4, $t1, 5
+```
+```
+addi $t1, $t0, 1
+addi $t2, $t0, 2
+addi $t3, $t0, 2
+addi $t3, $t0, 4
+addi $t5, $t0, 5
+```
+10. Modificar el circuito del Logisim del _datapath_ de ciclo único con unidad de control para que ejecute las instrucciones usando _pipelining_. Es decir, agregar los registros que separan las etapas. Ignorar completamente los riesgos de datos y de control.
